@@ -1,5 +1,6 @@
 {
   "name": "adafruit-gps",
   "author": "Dominick",
+  "license": "MIT",
   "description": "Adafruit GPS library"
 }
