@@ -2,5 +2,6 @@
   "name": "adafruit-gps",
   "author": "Dominick",
   "license": "MIT",
+  "version": "0.0.10",
   "description": "Adafruit GPS library"
 }
