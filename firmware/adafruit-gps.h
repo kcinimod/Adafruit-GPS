@@ -76,8 +76,8 @@ All text above must be included in any redistribution
 #if defined (__AVR__) && !defined(__AVR_ATmega32U4__)
  #include "SoftwareSerial.h"
 #endif
-#elif defined(SPARK)
- #include "application.h"
+#elif USE_SPARK_CORE_V02
+ #include <spark_related_stuff_v2.h>
 // #else
 //  #include "WProgram.h"
 //  #include "NewSoftSerial.h"
