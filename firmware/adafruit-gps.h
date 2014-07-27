@@ -78,9 +78,9 @@ All text above must be included in any redistribution
 #endif
 #elif USE_SPARK_CORE_V02
  #include <spark_related_stuff_v2.h>
-// #else
-//  #include "WProgram.h"
-//  #include "NewSoftSerial.h"
+#else
+ #include "WProgram.h"
+ #include "NewSoftSerial.h"
 #endif
 
 
