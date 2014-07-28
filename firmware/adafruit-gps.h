@@ -81,7 +81,7 @@ All text above must be included in any redistribution
 //  #include "NewSoftSerial.h"
 // #endif
 
-#include <application.h>
+#include "application.h"
 
 class Adafruit_GPS {
  public:
