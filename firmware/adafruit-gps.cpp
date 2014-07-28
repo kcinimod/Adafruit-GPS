@@ -12,6 +12,7 @@ All text above must be included in any redistribution
 
 #include "adafruit-gps.h"
 #include <math.h>
+#include <ctype.h>
 
 // how long are max NMEA lines to parse?
 #define MAXLINELENGTH 120
@@ -221,7 +222,8 @@ Adafruit_GPS::Adafruit_GPS(NewSoftSerial *ser)
 #endif
 
 // Constructor when using HardwareSerial
-Adafruit_GPS::Adafruit_GPS(HardwareSerial *ser) {
+// Adafruit_GPS::Adafruit_GPS(HardwareSerial *ser) {
+Adafruit_GPS::Adafruit_GPS(USARTSerial *ser) {
   common_init();  // Set everything to common state, then...
   gpsHwSerial = ser; // ...override gpsHwSerial with value passed.
 }
