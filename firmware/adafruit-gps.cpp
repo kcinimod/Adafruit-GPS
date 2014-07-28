@@ -11,6 +11,7 @@ All text above must be included in any redistribution
 ****************************************/
 
 #include "adafruit-gps.h"
+#include <math.h>
 
 // how long are max NMEA lines to parse?
 #define MAXLINELENGTH 120
