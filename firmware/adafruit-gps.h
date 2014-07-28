@@ -76,9 +76,9 @@ All text above must be included in any redistribution
 #if defined (__AVR__) && !defined(__AVR_ATmega32U4__)
  #include "SoftwareSerial.h"
 #endif
-// #else
+#else
 //  #include "WProgram.h"
-//  #include "NewSoftSerial.h"
+ #include "NewSoftSerial.h"
 #endif
 
 #include "application.h"
