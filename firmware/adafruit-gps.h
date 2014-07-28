@@ -138,7 +138,8 @@ class Adafruit_GPS {
     NewSoftSerial  *gpsSwSerial;
   #endif
 #endif
-  HardwareSerial *gpsHwSerial;
+  // HardwareSerial *gpsHwSerial;
+    USARTSerial *gpsHwSerial;
 };
 
 
