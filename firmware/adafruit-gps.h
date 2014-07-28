@@ -71,20 +71,17 @@ All text above must be included in any redistribution
 // how long to wait when we're looking for a response
 #define MAXWAITSENTENCE 5
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#if defined (__AVR__) && !defined(__AVR_ATmega32U4__)
- #include "SoftwareSerial.h"
-#endif
-#elif defined(SPARK)
- #include "application.h"
-#elif USE_SPARK_CORE_V02
- #include <spark_related_stuff_v2.h>
+// #if ARDUINO >= 100
+//  #include "Arduino.h"
+// #if defined (__AVR__) && !defined(__AVR_ATmega32U4__)
+//  #include "SoftwareSerial.h"
+// #endif
 // #else
 //  #include "WProgram.h"
 //  #include "NewSoftSerial.h"
-#endif
+// #endif
 
+#include "application.h"
 
 class Adafruit_GPS {
  public:
