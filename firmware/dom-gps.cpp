@@ -16,46 +16,6 @@ volatile char *lastline;
 volatile boolean recvdflag;
 volatile boolean inStandbyMode;
 
-Dom_GPS::Dom_GPS()
-{
-	recvdflag 	= false;
-	paused 		= false;
-	lineidx		= 0;
-	currentline = line1;
-	lastline	= line2;
-
-	/* uint8_t */
-	hour 		= 0;
-	minute 		= 0;
-	seconds 	= 0;
-	year 		= 0;
-	month 		= 0;
-	day 		= 0;
-	fixquality 	= 0;
-	satellites 	= 0;
-
-	/* char */
-	lat = 0;
-	lon = 0;
-	mag = 0;
-
-	/* boolean */
-	fix = false;
-
-	/* uint16_t */
-	milliseconds = 0;
-
-	/* float */
-	latitude 		= 0.0;
-	longitude 		= 0.0;
-	geoidheight 	= 0.0;
-	altitude 		= 0.0;
-	speed 			= 0.0;
-	angle 			= 0.0;
-	magvariation 	= 0.0;
-	HDOP 			= 0.0;
-}
-
 bool Dom_GPS::parse(char *nmea) {
 	// do checksum check
 
@@ -228,6 +188,46 @@ char Dom_GPS::read(void) {
     	lineidx = MAXLINELENGTH-1;
 
  	return c;
+}
+
+Dom_GPS::Dom_GPS()
+{
+	recvdflag 	= false;
+	paused 		= false;
+	lineidx		= 0;
+	currentline = line1;
+	lastline	= line2;
+
+	/* uint8_t */
+	hour 		= 0;
+	minute 		= 0;
+	seconds 	= 0;
+	year 		= 0;
+	month 		= 0;
+	day 		= 0;
+	fixquality 	= 0;
+	satellites 	= 0;
+
+	/* char */
+	lat = 0;
+	lon = 0;
+	mag = 0;
+
+	/* boolean */
+	fix = false;
+
+	/* uint16_t */
+	milliseconds = 0;
+
+	/* float */
+	latitude 		= 0.0;
+	longitude 		= 0.0;
+	geoidheight 	= 0.0;
+	altitude 		= 0.0;
+	speed 			= 0.0;
+	angle 			= 0.0;
+	magvariation 	= 0.0;
+	HDOP 			= 0.0;
 }
 
 void Dom_GPS::begin(uint16_t baud)
