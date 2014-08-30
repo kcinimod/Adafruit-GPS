@@ -48,6 +48,7 @@
 
 class Dom_GPS {
     public:
+        Dom_GPS();
         void begin(uint16_t baud); 
 
         char *lastNMEA(void);
