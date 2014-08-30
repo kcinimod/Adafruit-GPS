@@ -56,7 +56,7 @@ Dom_GPS::Dom_GPS()
 	HDOP 			= 0.0;
 }
 
-boolean Dom_GPS::parse(char *nmea) {
+bool Dom_GPS::parse(char *nmea) {
 	// do checksum check
 
   	// first look if we even have one
@@ -240,7 +240,7 @@ void Dom_GPS::sendCommand(char *str) {
 	Serial1.println(str);
 }
 
-boolean Dom_GPS::newNMEAreceived(void) {
+bool Dom_GPS::newNMEAreceived(void) {
   	return recvdflag;
 }
 
@@ -265,7 +265,7 @@ uint8_t Dom_GPS::parseHex(char c) {
        return (c - 'A')+10;
 }
 
-boolean Dom_GPS::waitForSentence(char *wait4me, uint8_t max) {
+bool Dom_GPS::waitForSentence(char *wait4me, uint8_t max) {
   	char str[20];
 
   	uint8_t i=0;
@@ -284,13 +284,13 @@ boolean Dom_GPS::waitForSentence(char *wait4me, uint8_t max) {
   	return false;
 }
 
-boolean Dom_GPS::LOCUS_StartLogger(void) {
+bool Dom_GPS::LOCUS_StartLogger(void) {
   	sendCommand(PMTK_LOCUS_STARTLOG);
   	recvdflag = false;
   	return waitForSentence(PMTK_LOCUS_LOGSTARTED);
 }
 
-boolean Dom_GPS::LOCUS_ReadStatus(void) {
+bool Dom_GPS::LOCUS_ReadStatus(void) {
   	sendCommand(PMTK_LOCUS_QUERY_STATUS);
   
   	if (! waitForSentence("$PMTKLOG"))
@@ -344,19 +344,19 @@ boolean Dom_GPS::LOCUS_ReadStatus(void) {
 }
 
 // Standby Mode Switches
-boolean Dom_GPS::standby(void) {
+bool Dom_GPS::standby(void) {
   	if (inStandbyMode) {
     	return false;  // Returns false if already in standby mode, so that you do not wake it up by sending commands to GPS
   	}
   	else {
     	inStandbyMode = true;
     	sendCommand(PMTK_STANDBY);
-    //return waitForSentence(PMTK_STANDBY_SUCCESS);  // don't seem to be fast enough to catch the message, or something else just is not working
+    	//return waitForSentence(PMTK_STANDBY_SUCCESS);  // don't seem to be fast enough to catch the message, or something else just is not working
     	return true;
   	}
 }
 
-boolean Dom_GPS::wakeup(void) {
+bool Dom_GPS::wakeup(void) {
   	if (inStandbyMode) {
    		inStandbyMode = false;
     	sendCommand("");  // send byte to wake it up

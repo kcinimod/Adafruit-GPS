@@ -1,6 +1,8 @@
 #ifndef _DOM_GPS_H
 #define _DOM_GPS_H
 
+#include "application.h"
+
 // different commands to set the update rate from once a second (1 Hz) to 10 times a second (10Hz)
 #define PMTK_SET_NMEA_UPDATE_1HZ  "$PMTK220,1000*1F"
 #define PMTK_SET_NMEA_UPDATE_5HZ  "$PMTK220,200*2C"
@@ -48,36 +50,36 @@ class Dom_GPS {
         void begin(uint16_t baud); 
 
         char *lastNMEA(void);
-        boolean newNMEAreceived();
+        bool newNMEAreceived();
         void sendCommand(char *);
         void pause(boolean b);
 
-        boolean parseNMEA(char *response);
+        bool parseNMEA(char *response);
         uint8_t parseHex(char c);
 
         char read(void);
-        boolean parse(char *);
+        bool parse(char *);
         void interruptReads(boolean r);
 
-        boolean wakeup(void);
-        boolean standby(void);
+        bool wakeup(void);
+        bool standby(void);
 
         uint8_t hour, minute, seconds, year, month, day;
         uint16_t milliseconds;
         float latitude, longitude, geoidheight, altitude;
         float speed, angle, magvariation, HDOP;
         char lat, lon, mag;
-        boolean fix;
+        bool fix;
         uint8_t fixquality, satellites;
 
-        boolean waitForSentence(char *wait, uint8_t max = MAXWAITSENTENCE);
-        boolean LOCUS_StartLogger(void);
-        boolean LOCUS_ReadStatus(void);
+        bool waitForSentence(char *wait, uint8_t max = MAXWAITSENTENCE);
+        bool LOCUS_StartLogger(void);
+        bool LOCUS_ReadStatus(void);
 
         uint16_t LOCUS_serial, LOCUS_records;
         uint8_t LOCUS_type, LOCUS_mode, LOCUS_config, LOCUS_interval, LOCUS_distance, LOCUS_speed, LOCUS_status, LOCUS_percent;
     private:
-        boolean paused;
+        bool paused;
   
         uint8_t parseResponse(char *response);
 };
