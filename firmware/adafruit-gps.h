@@ -1,38 +1,12 @@
-/***********************************
-This is the Adafruit GPS library - the ultimate GPS library
-for the ultimate GPS module!
+#ifndef _DOM_GPS_H
+#define _DOM_GPS_H
 
-Tested and works great with the Adafruit Ultimate GPS module
-using MTK33x9 chipset
-    ------> http://www.adafruit.com/products/746
-Pick one up today at the Adafruit electronics shop 
-and help support open source hardware & software! -ada
-
-Adafruit invests time and resources providing this open source code, 
-please support Adafruit and open-source hardware by purchasing 
-products from Adafruit!
-
-Written by Limor Fried/Ladyada  for Adafruit Industries.  
-BSD license, check license.txt for more information
-All text above must be included in any redistribution
-****************************************/
-
-#ifndef _ADAFRUIT_GPS_H
-#define _ADAFRUIT_GPS_H
-
-#ifdef __AVR__
-  #if ARDUINO >= 100
-    #include <SoftwareSerial.h>
-  #else
-    #include <NewSoftSerial.h>
-  #endif
-#endif
+#include "application.h"
 
 // different commands to set the update rate from once a second (1 Hz) to 10 times a second (10Hz)
 #define PMTK_SET_NMEA_UPDATE_1HZ  "$PMTK220,1000*1F"
 #define PMTK_SET_NMEA_UPDATE_5HZ  "$PMTK220,200*2C"
 #define PMTK_SET_NMEA_UPDATE_10HZ "$PMTK220,100*2F"
-
 
 #define PMTK_SET_BAUD_57600 "$PMTK251,57600*2C"
 #define PMTK_SET_BAUD_9600 "$PMTK251,9600*17"
@@ -71,76 +45,44 @@ All text above must be included in any redistribution
 // how long to wait when we're looking for a response
 #define MAXWAITSENTENCE 5
 
-// #if ARDUINO >= 100
-//  #include "Arduino.h"
-// #if defined (__AVR__) && !defined(__AVR_ATmega32U4__)
-//  #include "SoftwareSerial.h"
-// #endif
-// #else
-//  #include "WProgram.h"
- // #include "NewSoftSerial.h"
-// #endif
+class Dom_GPS {
+    public:
+        Dom_GPS();
+        void begin(uint16_t baud); 
 
-#include "application.h"
+        char *lastNMEA(void);
+        bool newNMEAreceived();
+        void sendCommand(char *);
+        void pause(boolean b);
 
-class Adafruit_GPS {
- public:
-  void begin(uint16_t baud); 
+        bool parseNMEA(char *response);
+        uint8_t parseHex(char c);
 
-#ifdef __AVR__
-  #if ARDUINO >= 100 
-    Adafruit_GPS(SoftwareSerial *ser); // Constructor when using SoftwareSerial
-  #else
-    Adafruit_GPS(NewSoftSerial  *ser); // Constructor when using NewSoftSerial
-  #endif
-#endif
-  // Adafruit_GPS(HardwareSerial *ser); // Constructor when using HardwareSerial
-  Adafruit_GPS(USARTSerial *ser); // Constructor when using HardwareSerial
+        char read(void);
+        bool parse(char *);
+        void interruptReads(boolean r);
 
-  char *lastNMEA(void);
-  boolean newNMEAreceived();
-  void common_init(void);
-  void sendCommand(char *);
-  void pause(boolean b);
+        bool wakeup(void);
+        bool standby(void);
 
-  boolean parseNMEA(char *response);
-  uint8_t parseHex(char c);
+        uint8_t hour, minute, seconds, year, month, day;
+        uint16_t milliseconds;
+        float latitude, longitude, geoidheight, altitude;
+        float speed, angle, magvariation, HDOP;
+        char lat, lon, mag;
+        bool fix;
+        uint8_t fixquality, satellites;
 
-  char read(void);
-  boolean parse(char *);
-  void interruptReads(boolean r);
+        bool waitForSentence(char *wait, uint8_t max = MAXWAITSENTENCE);
+        bool LOCUS_StartLogger(void);
+        bool LOCUS_ReadStatus(void);
 
-  boolean wakeup(void);
-  boolean standby(void);
-
-  uint8_t hour, minute, seconds, year, month, day;
-  uint16_t milliseconds;
-  float latitude, longitude, geoidheight, altitude;
-  float speed, angle, magvariation, HDOP;
-  char lat, lon, mag;
-  boolean fix;
-  uint8_t fixquality, satellites;
-
-  boolean waitForSentence(char *wait, uint8_t max = MAXWAITSENTENCE);
-  boolean LOCUS_StartLogger(void);
-  boolean LOCUS_ReadStatus(void);
-
-  uint16_t LOCUS_serial, LOCUS_records;
-  uint8_t LOCUS_type, LOCUS_mode, LOCUS_config, LOCUS_interval, LOCUS_distance, LOCUS_speed, LOCUS_status, LOCUS_percent;
- private:
-  boolean paused;
+        uint16_t LOCUS_serial, LOCUS_records;
+        uint8_t LOCUS_type, LOCUS_mode, LOCUS_config, LOCUS_interval, LOCUS_distance, LOCUS_speed, LOCUS_status, LOCUS_percent;
+    private:
+        bool paused;
   
-  uint8_t parseResponse(char *response);
-#ifdef __AVR__
-  #if ARDUINO >= 100
-    SoftwareSerial *gpsSwSerial;
-  #else
-    NewSoftSerial  *gpsSwSerial;
-  #endif
-#endif
-  // HardwareSerial *gpsHwSerial;
-    USARTSerial *gpsHwSerial;
+        uint8_t parseResponse(char *response);
 };
-
 
 #endif
