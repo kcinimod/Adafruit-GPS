@@ -1,4 +1,4 @@
-#include "dom-gps.h"
+#include "adafruit-gps.h"
 #include <math.h>
 #include <ctype.h>
 
