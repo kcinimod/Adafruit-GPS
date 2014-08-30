@@ -232,7 +232,7 @@ Dom_GPS::Dom_GPS()
 
 void Dom_GPS::begin(uint16_t baud)
 {
-	Serial1.begin();
+	Serial1.begin(baud);
   	delay(10);
 }
 
