@@ -1,7 +1,7 @@
 #ifndef _DOM_GPS_H
 #define _DOM_GPS_H
 
-// #include "application.h"
+#include "application.h"
 
 // different commands to set the update rate from once a second (1 Hz) to 10 times a second (10Hz)
 #define PMTK_SET_NMEA_UPDATE_1HZ  "$PMTK220,1000*1F"
