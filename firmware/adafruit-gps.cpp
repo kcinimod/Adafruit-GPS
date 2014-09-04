@@ -155,7 +155,7 @@ char Dom_GPS::read(void) {
 
  	c = Serial1.read();
 
-  	Serial.print(c);
+  	// Serial.print(c);
 
   	if (c == '$') {
     	currentline[lineidx] = 0;
@@ -174,9 +174,9 @@ char Dom_GPS::read(void) {
       		lastline = line2;
     	}	
 
-    	Serial.println("----");
-    	Serial.println((char *)lastline);
-    	Serial.println("----");
+    	// Serial.println("----");
+    	// Serial.println((char *)lastline);
+    	// Serial.println("----");
 
     	lineidx = 0;
     	recvdflag = true;
@@ -185,7 +185,7 @@ char Dom_GPS::read(void) {
   	currentline[lineidx++] = c;
 
   	if (lineidx >= MAXLINELENGTH)
-    	lineidx = MAXLINELENGTH-1;
+    	lineidx = MAXLINELENGTH - 1;
 
  	return c;
 }
@@ -233,7 +233,7 @@ Dom_GPS::Dom_GPS()
 void Dom_GPS::begin(uint16_t baud)
 {
 	Serial1.begin(baud);
-  	delay(10);
+    delay(10);
 }
 
 void Dom_GPS::sendCommand(char *str) {
